@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.af_poo.model.Cliente;
 import com.example.af_poo.model.Reserva;
+import com.example.af_poo.model.Veiculo;
 
 import org.springframework.stereotype.Component;
 
@@ -33,4 +35,34 @@ public class ReservaRepository {
         reservas.add(reserva);
         return reserva;
     }
+
+	public List<Reserva> getReservasByCliente(Cliente cliente) {
+
+        List<Reserva> reservas = getAllReservas();
+        ArrayList<Reserva> reservasCliente = new ArrayList<Reserva>();
+
+        for(Reserva aux : reservas){
+            if(cliente == aux.getCliente()){
+                reservasCliente.add(aux);
+            }
+        }
+
+		return reservasCliente;
+	}
+
+	public List<Reserva> getReservasByVeiculo(Veiculo veiculo) {
+
+        List<Reserva> reservas = getAllReservas();
+        ArrayList<Reserva> reservasVeiculo = new ArrayList<Reserva>();
+
+        for(Reserva aux : reservas){
+            if(veiculo == aux.getVeiculo()){
+                reservasVeiculo.add(aux);
+            }
+        }
+
+		return reservasVeiculo;
+	}
+
+
 }

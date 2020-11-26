@@ -30,7 +30,7 @@ public class ClienteController {
 
     @GetMapping()
     public List<Cliente> getClientes(){
-        return clienteService.getAllClientes();
+        return clienteService.getAllClientes();/* */
     }
 
     @GetMapping("/{codigo}")

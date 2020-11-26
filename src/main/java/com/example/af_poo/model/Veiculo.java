@@ -6,6 +6,8 @@ public class Veiculo {
     private String modelo;
     private double valorDiaria;
 
+    
+
     public int getCodigo() {
         return codigo;
     }
@@ -29,6 +31,10 @@ public class Veiculo {
     public void setValorDiaria(double valorDiaria) {
         this.valorDiaria = valorDiaria;
     }
+
+   /* public Veiculo(int codigo) {
+        this.codigo = codigo;
+    }*/
 
     
 

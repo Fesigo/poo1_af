@@ -7,6 +7,8 @@ public class Cliente {
     private String endereco;
     private String cpf;
 
+    
+
     public int getCodigo() {
         return codigo;
     }
@@ -38,5 +40,15 @@ public class Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    /*public Cliente(int codigo, String nome, String endereco, String cpf) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.cpf = cpf;
+    }
+
+    public Cliente() {
+    }*/
 
 }
