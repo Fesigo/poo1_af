@@ -36,7 +36,7 @@ public class ReservaRepository {
         return reserva;
     }
 
-	public List<Reserva> getReservasByCliente(Cliente cliente) {
+	public Optional<List<Reserva>> getReservasByCliente(Cliente cliente) {
 
         List<Reserva> reservas = getAllReservas();
         ArrayList<Reserva> reservasCliente = new ArrayList<Reserva>();
@@ -46,11 +46,16 @@ public class ReservaRepository {
                 reservasCliente.add(aux);
             }
         }
-
-		return reservasCliente;
+        
+        if(reservasCliente.size() > 0){
+            return Optional.of(reservasCliente);
+        }
+        else{
+            return Optional.empty();
+        }
 	}
 
-	public List<Reserva> getReservasByVeiculo(Veiculo veiculo) {
+	public Optional<List<Reserva>> getReservasByVeiculo(Veiculo veiculo) {
 
         List<Reserva> reservas = getAllReservas();
         ArrayList<Reserva> reservasVeiculo = new ArrayList<Reserva>();
@@ -61,7 +66,13 @@ public class ReservaRepository {
             }
         }
 
-		return reservasVeiculo;
+        if(reservasVeiculo.size() > 0){
+            return Optional.of(reservasVeiculo);
+        }
+        else{
+            return Optional.empty();
+        }
+
 	}
 
 

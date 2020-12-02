@@ -3,6 +3,7 @@ package com.example.af_poo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import com.example.af_poo.dto.VeiculoDTO;
 import com.example.af_poo.model.Veiculo;
@@ -41,7 +42,7 @@ public class VeiculoController {
     }
 
     @PostMapping()
-    public ResponseEntity<Veiculo> salvar(@RequestBody Veiculo veiculo, HttpServletRequest request, UriComponentsBuilder builder){
+    public ResponseEntity<Veiculo> salvar(@RequestBody @Valid Veiculo veiculo, HttpServletRequest request, UriComponentsBuilder builder){
         Veiculo novoVeiculo = veiculoService.salvar(veiculo);
         UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + novoVeiculo.getCodigo()).build();
         return ResponseEntity.created(uriComponents.toUri()).build();
@@ -54,7 +55,7 @@ public class VeiculoController {
     }
 
     @PutMapping("/{codigo}")
-    public ResponseEntity<Veiculo> atualizar(@RequestBody VeiculoDTO veiculoDTO, @PathVariable int codigo){
+    public ResponseEntity<Veiculo> atualizar(@RequestBody @Valid VeiculoDTO veiculoDTO, @PathVariable int codigo){
         Veiculo veiculo = veiculoService.fromDTO(veiculoDTO);
 
         veiculo.setCodigo(codigo);

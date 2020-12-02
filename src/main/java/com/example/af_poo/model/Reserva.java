@@ -65,5 +65,12 @@ public class Reserva {
         this.totalReserva = totalReserva;
     }
 
+    public double calculaTotal(LocalDateTime inicio, LocalDateTime fim, double valorDiaria){
+        double total = 0;
+
+        total = fim.compareTo(inicio) * valorDiaria;
+
+        return total;
+    }
     
 }

@@ -3,6 +3,7 @@ package com.example.af_poo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import com.example.af_poo.dto.ClienteDTO;
 import com.example.af_poo.model.Cliente;
@@ -30,7 +31,7 @@ public class ClienteController {
 
     @GetMapping()
     public List<Cliente> getClientes(){
-        return clienteService.getAllClientes();/* */
+        return clienteService.getAllClientes();
     }
 
     @GetMapping("/{codigo}")
@@ -41,7 +42,7 @@ public class ClienteController {
     }
 
     @PostMapping()
-    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente, HttpServletRequest request, UriComponentsBuilder builder){
+    public ResponseEntity<Cliente> salvar(@RequestBody @Valid Cliente cliente, HttpServletRequest request, UriComponentsBuilder builder){
         Cliente novoCliente = clienteService.salvar(cliente);
         UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + novoCliente.getCodigo()).build();
         return ResponseEntity.created(uriComponents.toUri()).build();
@@ -54,7 +55,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{codigo}")
-    public ResponseEntity<Cliente> atualizar(@RequestBody ClienteDTO clienteDTO, @PathVariable int codigo){
+    public ResponseEntity<Cliente> atualizar(@RequestBody @Valid ClienteDTO clienteDTO, @PathVariable int codigo){
         Cliente cliente = clienteService.fromDTO(clienteDTO);
 
         cliente.setCodigo(codigo);
