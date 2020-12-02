@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.af_poo.model.Reserva;
 import com.example.af_poo.model.Veiculo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class VeiculoRepository {
+
+    @Autowired
+    private ReservaRepository reservaRepository;
     
     private ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
     private int nextCode = 1;
@@ -34,8 +39,16 @@ public class VeiculoRepository {
         return veiculo;
     }
 
-    public void remove(Veiculo veiculo){
-        veiculos.remove(veiculo);
+    public Optional<Veiculo> remove(Veiculo veiculo){
+
+        Optional<List<Reserva>> reservas = reservaRepository.getReservasByVeiculo(veiculo);
+
+        if(reservas.equals(Optional.empty())){
+            veiculos.remove(veiculo);
+            return Optional.of(veiculo);
+        }
+        return Optional.empty();
+        
     }
 
     public Veiculo update(Veiculo veiculo){

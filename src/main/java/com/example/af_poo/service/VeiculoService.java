@@ -32,7 +32,9 @@ public class VeiculoService {
     }
 
     public void removeByCodigo(int codigo){
-        veiculoRepository.remove(getVeiculoByCodigo(codigo));
+        Optional<Veiculo> op = veiculoRepository.remove(getVeiculoByCodigo(codigo));
+        
+        op.orElseThrow( () -> new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Esse veículo não pode ser deletado, pois ele possui reserva(s)"));
     }
 
     public Veiculo update(Veiculo veiculo){

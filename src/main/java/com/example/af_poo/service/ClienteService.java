@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.example.af_poo.dto.ClienteDTO;
 import com.example.af_poo.model.Cliente;
 import com.example.af_poo.repository.ClienteRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,9 @@ public class ClienteService {
     }
 
     public void removeByCodigo(int codigo){
-        clienteRepository.remove(getClienteByCodigo(codigo));
+        Optional<Cliente> op = clienteRepository.remove(getClienteByCodigo(codigo));
+
+        op.orElseThrow( () -> new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Esse cliente não pode ser deletado, pois ele possui reserva(s)"));
     }
 
     public Cliente update(Cliente cliente){

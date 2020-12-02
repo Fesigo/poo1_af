@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.af_poo.model.Cliente;
-
+import com.example.af_poo.model.Reserva;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClienteRepository {
+
+    @Autowired
+    private ReservaRepository reservaRepository;
     
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private int nextCode = 1;
@@ -34,8 +38,16 @@ public class ClienteRepository {
         return cliente;
     }
 
-    public void remove(Cliente cliente){
-        clientes.remove(cliente);
+    public Optional<Cliente> remove(Cliente cliente){
+
+        Optional<List<Reserva>> reservas = reservaRepository.getReservasByCliente(cliente);
+
+        if(reservas.equals(Optional.empty())){
+            clientes.remove(cliente);
+            return Optional.of(cliente);
+        }
+        return Optional.empty();
+
     }
 
     public Cliente update(Cliente cliente){
