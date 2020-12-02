@@ -12,7 +12,7 @@ public class Veiculo {
     @Length(min = 4, max = 40, message = "O Modelo deve ter no mínimo 4 e no máximo 40 caracteres!")
     private String modelo;
     
-    private double valorDiaria;
+    private Double valorDiaria;
 
     public int getCodigo() {
         return codigo;
@@ -30,11 +30,11 @@ public class Veiculo {
         this.modelo = modelo;
     }
 
-    public double getValorDiaria() {
+    public Double getValorDiaria() {
         return valorDiaria;
     }
 
-    public void setValorDiaria(double valorDiaria) {
+    public void setValorDiaria(Double valorDiaria) {
         this.valorDiaria = valorDiaria;
     }
 

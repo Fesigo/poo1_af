@@ -73,8 +73,6 @@ public class ReservaService {
             }
         }
 
-       
-
         reserva.setCliente(cliente);
         reserva.setVeiculo(veiculo);
 
