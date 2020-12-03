@@ -3,6 +3,8 @@ package com.example.af_poo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import com.example.af_poo.dto.ReservaDTO;
 import com.example.af_poo.model.Reserva;
 import com.example.af_poo.service.ReservaService;
@@ -36,7 +38,7 @@ public class ReservaController {
     }
 
     @PostMapping("/reserva/cliente/{idCliente}/veiculo/{idVeiculo}")
-    public ResponseEntity<Reserva> salvar(@PathVariable int idCliente, @PathVariable int idVeiculo, @RequestBody ReservaDTO reservaDTO, HttpServletRequest request, UriComponentsBuilder builder){
+    public ResponseEntity<Reserva> salvar(@PathVariable int idCliente, @PathVariable int idVeiculo, @RequestBody @Valid ReservaDTO reservaDTO, HttpServletRequest request, UriComponentsBuilder builder){
         Reserva reserva = reservaService.fromDTO(reservaDTO);
         reserva = reservaService.salvar(reserva, idCliente, idVeiculo);
         UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + reserva.getNumero()).build();
